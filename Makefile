@@ -54,7 +54,7 @@ test-nginx:
 	@docker exec -d ${TEST_CONTAINER_NAME} supervisord --configuration /etc/supervisord.conf
 	@echo "## Waiting for nginx to start..."
 
-	@docker exec ${TEST_CONTAINER_NAME} sh -c "until (service nginx status >dev/null || ! nginx -t > /dev/null 2>&1); do sleep 1; done && nginx -t"
+	@docker exec ${TEST_CONTAINER_NAME} timeout 10m sh -c "until (test -s /etc/nginx/nginx.conf && (service nginx status >dev/null || ! nginx -t > /dev/null 2>&1)); do sleep 1; done && nginx -t"
 
 	@echo "## Tearing down test container and image"
 	@docker rm -f ${TEST_CONTAINER_NAME}
