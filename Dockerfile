@@ -13,7 +13,7 @@ RUN apt-get update && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /usr/share/nginx/html && \
     mkdir -p /var/log/digitalmarketplace && \
-    rm -f /etc/nginx/sites-enabled/*
+    rm -f /etc/nginx/nginx.conf /etc/nginx/sites-enabled/*
 
 # TODO prefer apt-get install if nginx-prometheus-exporter is ever packaged as such
 # For now make do with binary tarball and assert its sha256
