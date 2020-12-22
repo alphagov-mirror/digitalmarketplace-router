@@ -4,11 +4,11 @@ export DM_CLOUDFRONT_IPS=$(/app/scripts/get-cloudfront-ips.py)
 export DM_RESOLVER_IP=$(awk '/nameserver/{ print $2; exit}' /etc/resolv.conf)
 
 if [[ $DM_MODE == 'maintenance' ]]; then
-    templates="maintenance healthcheck metrics"
+    templates="maintenance healthcheck"
 elif [[ $DM_MODE == 'recovery' ]]; then
-    templates="api maintenance healthcheck metrics"
+    templates="api maintenance healthcheck"
 else
-    templates="api assets www healthcheck metrics"
+    templates="api assets www healthcheck"
 fi
 
 for template in $templates; do
